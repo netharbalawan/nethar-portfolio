@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-  <title>Nethar Balawan Mualikul Mulki | Portofolio Profesional - Sistem Informasi</title>
-  <!-- Bootstrap 5 + Icons + Fonts + AOS + Typed.js -->
+  <title>Nethar Balawan Mualikul Mulki | Portofolio</title>
+  <!-- Bootstrap 5 + Icons + Fonts + AOS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -17,268 +17,382 @@
       padding: 0;
       box-sizing: border-box;
     }
+    
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #0F172A;
+      background-color: #0a0a0f;
       color: #ffffff;
       overflow-x: hidden;
-      cursor: default;
+      line-height: 1.5;
     }
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: #1E293B; }
+    
+    /* ========== CUSTOM SCROLLBAR ========== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1a1a2e; }
     ::-webkit-scrollbar-thumb { background: #38BDF8; border-radius: 10px; }
-
-    .cursor-glow {
-      width: 35px;
-      height: 35px;
-      background: radial-gradient(circle, rgba(56,189,248,0.5), rgba(6,182,212,0));
-      border-radius: 50%;
-      position: fixed;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%);
-      transition: transform 0.05s linear;
-      opacity: 0.7;
-    }
+    
+    /* ========== LOADING SCREEN ========== */
     #loading-screen {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: #0F172A;
+      background: #0a0a0f;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 10000;
-      transition: opacity 0.8s ease;
+      transition: opacity 0.5s ease;
     }
     .loader {
-      width: 60px;
-      height: 60px;
-      border: 4px solid #1E293B;
-      border-top: 4px solid #38BDF8;
+      width: 50px;
+      height: 50px;
+      border: 3px solid #1a1a2e;
+      border-top: 3px solid #38BDF8;
       border-radius: 50%;
-      animation: spin 1s linear infinite;
+      animation: spin 0.8s linear infinite;
     }
     @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     
-    .gradient-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -2; background: radial-gradient(circle at 20% 30%, #0F172A, #0a0f1f); }
-    .animated-bg {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-      background: linear-gradient(125deg, #0F172A, #1E293B, #0b1120);
-      background-size: 300% 300%;
-      animation: gradientFlow 16s ease infinite;
+    /* ========== BACKGROUND MODERN ========== */
+    .bg-gradient-main {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: radial-gradient(ellipse at 20% 30%, #0f0f1a, #080811);
     }
-    @keyframes gradientFlow { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
     
-    .scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: linear-gradient(90deg, #38BDF8, #06B6D4); z-index: 1030; transition: width 0.1s; }
+    .bg-animated {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(125deg, #0f0f1a, #1a1a2e, #0a0a0f, #16213e);
+      background-size: 400% 400%;
+      animation: gradientShift 18s ease infinite;
+    }
     
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    /* Floating Glow Orbs */
+    .glow-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.2;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .orb-cyan { width: 350px; height: 350px; background: #38BDF8; top: 5%; left: -100px; animation: floatGlow 22s infinite; }
+    .orb-teal { width: 450px; height: 450px; background: #06B6D4; bottom: 5%; right: -150px; animation: floatGlow 28s infinite reverse; }
+    .orb-purple { width: 250px; height: 250px; background: #8B5CF6; top: 40%; left: 20%; animation: floatGlow 25s infinite; }
+    
+    @keyframes floatGlow {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(50px, -40px) scale(1.1); }
+      66% { transform: translate(-40px, 40px) scale(0.9); }
+    }
+    
+    @media (max-width: 768px) { .glow-orb { display: none; } }
+    
+    /* ========== SCROLL PROGRESS ========== */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: linear-gradient(90deg, #38BDF8, #06B6D4, #8B5CF6);
+      z-index: 1030;
+      transition: width 0.1s;
+    }
+    
+    /* ========== NAVBAR ========== */
     .navbar {
-      background: rgba(15, 23, 42, 0.75);
+      background: rgba(10, 10, 15, 0.8);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
       transition: all 0.3s;
+      padding: 1rem 0;
     }
-    .navbar-brand { font-weight: 700; font-size: 1.6rem; background: linear-gradient(135deg, #fff, #38BDF8); -webkit-background-clip: text; background-clip: text; color: transparent; }
-    .nav-link { font-weight: 500; color: #e2e8f0 !important; margin: 0 5px; transition: 0.3s; position: relative; }
-    .nav-link:hover, .nav-link.active { color: #38BDF8 !important; text-shadow: 0 0 6px #38BDF8; }
-    
-    /* Efek underline pada navlink */
-    .nav-link::after {
+    .navbar.scrolled { padding: 0.5rem 0; background: rgba(10, 10, 15, 0.95); }
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, #fff, #38BDF8, #06B6D4);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .nav-link {
+      font-weight: 500;
+      color: #cbd5e1 !important;
+      margin: 0 0.5rem;
+      transition: 0.3s;
+      position: relative;
+    }
+    .nav-link::before {
       content: '';
       position: absolute;
-      bottom: -2px;
-      left: 50%;
-      transform: translateX(-50%);
+      bottom: -5px;
+      left: 0;
       width: 0;
       height: 2px;
       background: linear-gradient(90deg, #38BDF8, #06B6D4);
-      transition: width 0.3s ease;
+      transition: width 0.3s;
     }
-    .nav-link:hover::after,
-    .nav-link.active::after {
-      width: 60%;
+    .nav-link:hover::before, .nav-link.active::before { width: 100%; }
+    .nav-link:hover, .nav-link.active { color: #38BDF8 !important; }
+    
+    @media (max-width: 991px) {
+      .navbar-nav { padding: 1rem 0; }
+      .nav-link { text-align: center; padding: 0.5rem 0; }
+      .nav-link::before { display: none; }
     }
     
+    /* ========== GLASS CARD ========== */
     .glass-card {
-      background: rgba(30, 41, 59, 0.5);
+      background: rgba(20, 20, 35, 0.45);
       backdrop-filter: blur(12px);
       border-radius: 28px;
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      border: 1px solid rgba(56, 189, 248, 0.15);
       transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .glass-card:hover { transform: translateY(-6px); box-shadow: 0 20px 35px -10px rgba(6, 182, 212, 0.3); border-color: #38BDF8; }
+    .glass-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(56, 189, 248, 0.5);
+      background: rgba(30, 30, 50, 0.6);
+      box-shadow: 0 20px 40px -15px rgba(6, 182, 212, 0.25);
+    }
     
-    .btn-glow {
+    /* ========== BUTTONS ========== */
+    .btn-primary-glow {
       background: linear-gradient(95deg, #38BDF8, #06B6D4);
       border: none;
-      padding: 12px 28px;
+      padding: 0.75rem 1.8rem;
       font-weight: 600;
-      border-radius: 40px;
-      color: #0F172A;
+      border-radius: 50px;
+      color: #0a0a0f;
       transition: all 0.3s;
-      box-shadow: 0 4px 12px rgba(56,189,248,0.3);
+      box-shadow: 0 4px 15px rgba(56, 189, 248, 0.3);
     }
-    .btn-glow:hover { transform: scale(1.05); box-shadow: 0 10px 25px #38bdf880; color: #000; }
-    .btn-outline-premium {
+    .btn-primary-glow:hover { transform: scale(1.05); box-shadow: 0 8px 25px rgba(56, 189, 248, 0.5); color: #000; }
+    .btn-outline-light {
       background: transparent;
       border: 1px solid #38BDF8;
-      padding: 12px 28px;
-      border-radius: 40px;
+      padding: 0.75rem 1.8rem;
+      border-radius: 50px;
       color: white;
       font-weight: 500;
       transition: 0.3s;
     }
-    .btn-outline-premium:hover { background: #38BDF8; color: #0F172A; box-shadow: 0 0 12px #38bdf8; }
+    .btn-outline-light:hover { background: #38BDF8; color: #0a0a0f; box-shadow: 0 0 15px #38bdf8; }
     
+    @media (max-width: 576px) {
+      .btn-primary-glow, .btn-outline-light { padding: 0.5rem 1.2rem; font-size: 0.85rem; }
+    }
+    
+    /* ========== PROFILE IMAGE ========== */
     .profile-img {
-      width: 180px;
-      height: 180px;
+      width: 160px;
+      height: 160px;
       object-fit: cover;
       border-radius: 50%;
       border: 3px solid #38BDF8;
-      box-shadow: 0 0 30px rgba(56,189,248,0.5);
+      box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
       transition: 0.4s;
     }
     .profile-img:hover { transform: scale(1.02); box-shadow: 0 0 45px #06B6D4; }
+    @media (min-width: 768px) { .profile-img { width: 190px; height: 190px; } }
     
-    .skill-item { margin-bottom: 1.5rem; }
-    .progress-bar-custom { height: 8px; background: #334155; border-radius: 10px; overflow: hidden; }
-    .progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #38BDF8, #06B6D4); border-radius: 10px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); }
+    /* ========== TYPOGRAPHY RESPONSIVE ========== */
+    .display-4 { font-size: 1.8rem; }
+    .fs-3 { font-size: 1.3rem; }
+    .lead { font-size: 0.9rem; }
     
+    @media (min-width: 768px) {
+      .display-4 { font-size: 2.5rem; }
+      .fs-3 { font-size: 1.8rem; }
+      .lead { font-size: 1rem; }
+    }
+    @media (min-width: 992px) {
+      .display-4 { font-size: 3rem; }
+      .lead { font-size: 1.1rem; }
+    }
+    
+    .typed-cursor { font-size: inherit; color: #38BDF8; }
+    
+    /* ========== SKILLS ========== */
+    .skill-item { margin-bottom: 1.2rem; }
+    .skill-name { font-size: 0.85rem; margin-bottom: 0.25rem; }
+    @media (min-width: 768px) { .skill-name { font-size: 1rem; } }
+    .progress-bar-custom { height: 6px; background: #2a2a3e; border-radius: 10px; overflow: hidden; }
+    .progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #38BDF8, #06B6D4); border-radius: 10px; transition: width 1s ease; }
+    
+    /* ========== FILTER BUTTONS ========== */
     .filter-btn {
       background: transparent;
       border: 1px solid #38BDF8;
       color: white;
-      padding: 6px 18px;
+      padding: 0.4rem 1.2rem;
       border-radius: 40px;
-      margin: 5px;
+      margin: 0.25rem;
       transition: 0.2s;
+      font-size: 0.8rem;
     }
-    .filter-btn.active, .filter-btn:hover { background: #38BDF8; color: #0F172A; }
-    .project-card { transition: all 0.4s; overflow: hidden; border-radius: 24px; }
-    .project-card img { transition: transform 0.5s; height: 200px; object-fit: cover; width: 100%; }
-    .project-card:hover img { transform: scale(1.08); }
-    .mobile-badge { background: rgba(6, 182, 212, 0.2); border-radius: 20px; padding: 4px 12px; font-size: 0.75rem; display: inline-block; margin-bottom: 8px; }
-    .mobile-badge i:empty { display: none; }
+    @media (min-width: 768px) {
+      .filter-btn { padding: 0.5rem 1.5rem; font-size: 0.9rem; margin: 0.35rem; }
+    }
+    .filter-btn.active, .filter-btn:hover { background: #38BDF8; color: #0a0a0f; }
     
-    .timeline { position: relative; padding-left: 30px; }
-    .timeline-item { position: relative; margin-bottom: 40px; }
-    .timeline-dot { position: absolute; left: -30px; top: 5px; width: 16px; height: 16px; background: #38BDF8; border-radius: 50%; box-shadow: 0 0 12px #38BDF8; }
-    .timeline-line { position: absolute; left: -22px; top: 20px; width: 2px; height: calc(100% + 20px); background: linear-gradient(to bottom, #38BDF8, #06B6D4); }
+    /* ========== PROJECT CARDS ========== */
+    .project-card { border-radius: 24px; overflow: hidden; height: 100%; }
+    .project-card img { height: 170px; object-fit: cover; width: 100%; transition: transform 0.5s; }
+    .project-card:hover img { transform: scale(1.05); }
+    @media (min-width: 768px) { .project-card img { height: 200px; } }
+    .project-card h5 { font-size: 1rem; margin-bottom: 0.5rem; }
+    .project-card p { font-size: 0.8rem; color: #cbd5e1; }
+    @media (min-width: 768px) {
+      .project-card h5 { font-size: 1.1rem; }
+      .project-card p { font-size: 0.85rem; }
+    }
+    .badge-tech {
+      background: rgba(6, 182, 212, 0.2);
+      border-radius: 20px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.65rem;
+      display: inline-block;
+      margin-bottom: 0.6rem;
+    }
     
-    .cert-img { height: 160px; object-fit: cover; border-radius: 20px; cursor: pointer; transition: 0.3s; width: 100%; }
-    .cert-img:hover { transform: scale(1.02); box-shadow: 0 10px 20px rgba(0,0,0,0.4); }
+    /* ========== TIMELINE ========== */
+    .timeline { position: relative; padding-left: 1.5rem; }
+    @media (min-width: 768px) { .timeline { padding-left: 2rem; } }
+    .timeline-item { position: relative; margin-bottom: 1.8rem; }
+    .timeline-dot {
+      position: absolute; left: -1.5rem; top: 0.3rem;
+      width: 10px; height: 10px; background: #38BDF8;
+      border-radius: 50%; box-shadow: 0 0 10px #38BDF8;
+    }
+    @media (min-width: 768px) { .timeline-dot { width: 12px; height: 12px; left: -2rem; } }
+    .timeline-line {
+      position: absolute; left: -1rem; top: 1.2rem;
+      width: 2px; height: calc(100% + 1rem);
+      background: linear-gradient(to bottom, #38BDF8, #06B6D4);
+    }
+    @media (min-width: 768px) { .timeline-line { left: -1.5rem; } }
     
-    @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-8px); } 100% { transform: translateY(0px); } }
-    .floating { animation: float 5s ease-in-out infinite; }
-    .scroll-down { position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); font-size: 28px; color: #38BDF8; animation: bounce 2s infinite; cursor: pointer; }
-    @keyframes bounce { 0%,100%{ transform: translateX(-50%) translateY(0);} 50%{ transform: translateX(-50%) translateY(10px);} }
+    /* ========== CERTIFICATE SECTION ========== */
+    .cert-card {
+      cursor: pointer;
+      transition: all 0.3s;
+      text-align: center;
+      padding: 1rem;
+    }
+    .cert-card:hover { transform: translateY(-4px); border-color: #38BDF8; }
+    .cert-card i { font-size: 2rem; color: #e74c3c; }
+    .cert-card p { font-size: 0.7rem; margin-top: 0.5rem; margin-bottom: 0; }
+    @media (min-width: 768px) { .cert-card i { font-size: 2.5rem; } .cert-card p { font-size: 0.75rem; } }
     
-    .typed-cursor { font-size: 2rem; color: #38BDF8; }
-    .linkedin-badge { background: #0e76a8; transition: 0.3s; border-radius: 12px; }
-    .linkedin-badge:hover { background: #0a5d85; transform: scale(1.02); }
+    /* ========== CONTACT FORM ========== */
+    .form-control {
+      background: rgba(20, 20, 35, 0.6);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: white;
+      border-radius: 16px;
+      padding: 0.75rem 1rem;
+    }
+    .form-control:focus {
+      background: rgba(20, 20, 35, 0.8);
+      border-color: #38BDF8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+      color: white;
+    }
+    .form-control::placeholder { color: #64748b; }
     
-    /* ========== PERBAIKAN RESPONSIF UNTUK HP ========== */
+    /* ========== SCROLL DOWN INDICATOR ========== */
+    .scroll-down {
+      position: absolute;
+      bottom: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.5rem;
+      color: #38BDF8;
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    }
+    @media (min-width: 768px) { .scroll-down { bottom: 2rem; font-size: 1.8rem; } }
+    @keyframes bounce { 0%,100%{ transform: translateX(-50%) translateY(0);} 50%{ transform: translateX(-50%) translateY(8px);} }
+    
+    /* ========== FLOATING ANIMATION ========== */
+    @keyframes floatAnim { 0% { transform: translateY(0px); } 50% { transform: translateY(-6px); } 100% { transform: translateY(0px); } }
+    .floating { animation: floatAnim 5s ease-in-out infinite; }
+    
+    /* ========== RESPONSIVE GRID ADJUSTMENT ========== */
     @media (max-width: 576px) {
       .container { padding-left: 16px !important; padding-right: 16px !important; }
-      .display-4 { font-size: 1.8rem !important; }
-      .fs-3 { font-size: 1.3rem !important; }
-      .lead { font-size: 0.9rem !important; }
-      .profile-img { width: 120px !important; height: 120px !important; }
-      .btn-glow, .btn-outline-premium { padding: 8px 18px !important; font-size: 0.85rem !important; }
-      .glass-card { padding: 1rem !important; }
-      .glass-card.p-3, .glass-card.p-4 { padding: 1rem !important; }
-      .skill-name { font-size: 0.85rem !important; }
-      .skill-name .float-end { font-size: 0.8rem !important; }
-      .progress-bar-custom { height: 6px !important; }
-      .filter-btn { padding: 4px 12px !important; font-size: 0.75rem !important; margin: 3px !important; }
-      .project-card img { height: 160px !important; }
-      .project-card h5 { font-size: 1rem !important; }
-      .project-card p { font-size: 0.8rem !important; }
-      .timeline { padding-left: 20px !important; }
-      .timeline-dot { left: -20px !important; width: 10px !important; height: 10px !important; }
-      .timeline-line { left: -15px !important; }
-      .timeline-item .glass-card h5 { font-size: 0.9rem !important; }
-      .timeline-item .glass-card h6 { font-size: 0.85rem !important; }
-      .timeline-item .glass-card p { font-size: 0.75rem !important; }
-      #certificates .col-6 { padding: 6px !important; }
-      #certificates .glass-card i { font-size: 2rem !important; }
-      #certificates .glass-card p { font-size: 0.65rem !important; }
-      #certificates .glass-card small { font-size: 0.6rem !important; }
-      #contact .glass-card h4 { font-size: 1.1rem !important; }
-      #contact .glass-card p { font-size: 0.8rem !important; }
-      footer p { font-size: 0.75rem !important; }
       section { padding-top: 2rem !important; padding-bottom: 2rem !important; }
-      .row.g-4 { --bs-gutter-y: 1rem !important; --bs-gutter-x: 0.8rem !important; }
-      .counter-number { font-size: 1.6rem !important; }
-      .scroll-down { bottom: 15px !important; font-size: 22px !important; }
-      .typed-cursor { font-size: 1.3rem !important; }
-      .navbar-brand { font-size: 1.2rem !important; }
-      .nav-link { font-size: 0.85rem !important; padding: 0.5rem 0 !important; }
-      .min-vh-100 { min-height: 90vh !important; }
-      .cursor-glow { display: none !important; }
-      button, .btn, .nav-link, .glass-card, .filter-btn { -webkit-tap-highlight-color: transparent; }
+      .row.g-4 { --bs-gutter-y: 1rem; --bs-gutter-x: 0.75rem; }
+      .glass-card { padding: 1rem !important; }
+      .counter-number { font-size: 1.5rem; }
+      .scroll-progress { height: 2px; }
+    }
+    
+    @media (min-width: 577px) and (max-width: 992px) {
+      .container { padding-left: 24px !important; padding-right: 24px !important; }
+      .project-card img { height: 180px; }
+    }
+    
+    /* Touch friendly */
+    @media (max-width: 768px) {
+      button, .btn, .nav-link, .glass-card, .filter-btn, .cert-card {
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
       .form-control { font-size: 16px !important; }
     }
     
-    /* Tablet */
-    @media (min-width: 577px) and (max-width: 992px) {
-      .container { padding-left: 24px !important; padding-right: 24px !important; }
-      .display-4 { font-size: 2rem !important; }
-      .profile-img { width: 150px !important; height: 150px !important; }
-      .project-card img { height: 180px !important; }
+    /* Modal styling */
+    .modal-content {
+      background: rgba(15, 15, 25, 0.95);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 28px;
     }
-    
-    /* ========== EFEK MODERN TAMBAHAN ========== */
-    .orb-1, .orb-2, .orb-3 {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.25;
-      z-index: -1;
-      pointer-events: none;
-    }
-    .orb-1 { width: 300px; height: 300px; background: #38BDF8; top: 10%; left: -100px; animation: floatOrb 25s ease-in-out infinite; }
-    .orb-2 { width: 400px; height: 400px; background: #06B6D4; bottom: 10%; right: -150px; animation: floatOrb 30s ease-in-out infinite reverse; }
-    .orb-3 { width: 200px; height: 200px; background: #8B5CF6; top: 40%; left: 30%; animation: floatOrb 20s ease-in-out infinite; }
-    @keyframes floatOrb {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(40px, -40px) scale(1.1); }
-      66% { transform: translate(-30px, 30px) scale(0.95); }
-    }
-    @media (max-width: 768px) { .orb-1, .orb-2, .orb-3 { display: none; } }
-    
-    /* Navbar scroll effect */
-    .navbar.scrolled { padding: 0.5rem 0 !important; background: rgba(15, 23, 42, 0.95) !important; box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important; }
-    
-    /* Modal modern */
-    .modal-content { background: rgba(30, 41, 59, 0.95) !important; backdrop-filter: blur(12px); border: 1px solid rgba(56, 189, 248, 0.3); }
   </style>
 </head>
 <body>
 
-<!-- Floating Orbs untuk background modern -->
-<div class="orb-1"></div>
-<div class="orb-2"></div>
-<div class="orb-3"></div>
-
 <div id="loading-screen"><div class="loader"></div></div>
-<div class="cursor-glow"></div>
-<div class="scroll-progress" id="scrollProgress"></div>
-<div class="gradient-bg"></div>
-<div class="animated-bg"></div>
 
-<!-- Navbar Sticky -->
-<nav class="navbar navbar-expand-lg fixed-top py-3" id="mainNavbar">
+<!-- Background Modern -->
+<div class="bg-gradient-main"></div>
+<div class="bg-animated"></div>
+<div class="glow-orb orb-cyan"></div>
+<div class="glow-orb orb-teal"></div>
+<div class="glow-orb orb-purple"></div>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNavbar">
   <div class="container">
-    <a class="navbar-brand" href="#">Nethar Balawan<span class="text-info">.</span>Mualikul Mulki</a>
-    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="background:#1E293B;">
+    <a class="navbar-brand" href="#">Nethar Balawan<span style="color:#38BDF8;">.</span>Mualikul Mulki</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="background:#1a1a2e; border:none; padding: 0.5rem 0.8rem;">
       <i class="bi bi-list fs-2 text-white"></i>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
         <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
@@ -294,15 +408,13 @@
 
 <main>
   <!-- Hero Section -->
-  <section id="home" class="min-vh-100 d-flex align-items-center position-relative" style="padding-top: 80px;">
-    <div class="container text-center text-lg-start">
-      <div class="row align-items-center">
-        <div class="col-lg-6 order-lg-1 text-center" data-aos="fade-right">
-          <div class="position-relative d-inline-block">
-            <img src="netharr.jpg" alt="Nethar Balawan" class="profile-img floating">
-          </div>
+  <section id="home" class="min-vh-100 d-flex align-items-center position-relative" style="padding-top: 70px;">
+    <div class="container">
+      <div class="row align-items-center gy-5">
+        <div class="col-lg-6 text-center text-lg-start order-lg-1" data-aos="fade-right">
+          <img src="netharr.jpg" alt="Nethar Balawan" class="profile-img floating" onerror="this.src='https://randomuser.me/api/portraits/men/32.jpg'">
         </div>
-        <div class="col-lg-6 order-lg-2" data-aos="fade-left">
+        <div class="col-lg-6 text-center text-lg-start order-lg-2" data-aos="fade-left">
           <h1 class="display-4 fw-bold">Nethar Balawan</h1>
           <p class="fs-3 text-info">I'm <span id="typed-strings" style="display:none;">
             <span>Web Developer</span>
@@ -312,10 +424,10 @@
           </span>
           <span id="typed-output" class="fw-semibold"></span>
           </p>
-          <p class="lead mb-4">Mahasiswa S1 Sistem Informasi Semester 4 di Universitas Bina Sarana Informatika dengan IPK 3.78/4.00. Memiliki minat yang kuat dalam bidang Teknologi Informasi, Pengembangan Sistem, UI/UX Design, dan Database. Mampu bekerja dalam tim, cepat beradaptasi dengan lingkungan baru, serta memiliki semangat belajar yang tinggi. Saat ini sedang mencari kesempatan magang untuk mengembangkan kemampuan profesional dan berkontribusi secara positif di dunia teknologi.</p>
-          <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap">
-            <a href="CV-Nethar Balawan.pdf" class="btn btn-glow" download id="downloadCVBtn"><i class="bi bi-download"></i> Download CV</a>
-            <a href="#projects" class="btn btn-outline-premium"><i class="bi bi-grid-3x3-gap-fill"></i> Lihat Project</a>
+          <p class="lead text-secondary">Mahasiswa S1 Sistem Informasi Semester 4 di Universitas Bina Sarana Informatika dengan IPK 3.78/4.00. Memiliki minat yang kuat dalam bidang Teknologi Informasi, Pengembangan Sistem, UI/UX Design, dan Database.</p>
+          <div class="d-flex gap-3 justify-content-center justify-content-lg-start flex-wrap mt-3">
+            <a href="CV-Nethar Balawan.pdf" class="btn btn-primary-glow" download><i class="bi bi-download"></i> Download CV</a>
+            <a href="#projects" class="btn btn-outline-light"><i class="bi bi-grid-3x3-gap-fill"></i> Lihat Project</a>
           </div>
         </div>
       </div>
@@ -326,24 +438,24 @@
   <!-- About Section -->
   <section id="about" class="py-5">
     <div class="container">
-      <div class="text-center mb-5" data-aos="fade-up">
+      <div class="text-center mb-4" data-aos="fade-up">
         <h2 class="fw-bold">Tentang <span class="text-info">Saya</span></h2>
-        <div class="mx-auto mt-2" style="width: 70px; height: 3px; background:#38BDF8;"></div>
+        <div class="mx-auto mt-2" style="width: 60px; height: 3px; background: linear-gradient(90deg, #38BDF8, #06B6D4);"></div>
       </div>
       <div class="row g-4">
         <div class="col-md-6" data-aos="fade-right">
           <div class="glass-card p-4 h-100">
-            <p class="fs-5">Mahasiswa Sistem Informasi yang berfokus pada Web Development, UI/UX Design, Database Management, dan Mobile Application Development. Berpengalaman dalam membangun berbagai proyek berbasis web serta memiliki semangat tinggi untuk terus belajar dan berkembang di dunia teknologi.</p>
-            <p class="mb-0"><i class="bi bi-envelope-fill text-info me-2"></i> 19240450.bsi.ac.id</p>
-            <p><i class="bi bi-github text-info me-2"></i> github.com/netharbalawan</p>
+            <p>Mahasiswa Sistem Informasi yang berfokus pada Web Development, UI/UX Design, Database Management, dan Mobile Application Development. Berpengalaman dalam membangun berbagai proyek berbasis web serta memiliki semangat tinggi untuk terus belajar dan berkembang di dunia teknologi.</p>
+            <p class="mb-1"><i class="bi bi-envelope-fill text-info me-2"></i> 19240450@bsi.ac.id</p>
+            <p class="mb-1"><i class="bi bi-github text-info me-2"></i> github.com/netharbalawan</p>
             <p><i class="bi bi-linkedin text-info me-2"></i> linkedin.com/in/netharbalawan</p>
           </div>
         </div>
         <div class="col-md-6" data-aos="fade-left">
           <div class="row g-3">
-            <div class="col-6"><div class="glass-card p-3 text-center"><h3 class="fw-bold counter-number" data-target="3">0</h3><p>Project Selesai</p></div></div>
-            <div class="col-6"><div class="glass-card p-3 text-center"><h3 class="fw-bold counter-number" data-target="8">0</h3><p>Skill Utama</p></div></div>
-            <div class="col-12"><div class="glass-card p-3 text-center"><h3 class="fw-bold counter-number" data-target="14">0</h3><p>Sertifikat</p></div></div>
+            <div class="col-6"><div class="glass-card p-3 text-center"><h3 class="fw-bold counter-number" data-target="3">0</h3><p class="mb-0">Project</p></div></div>
+            <div class="col-6"><div class="glass-card p-3 text-center"><h3 class="fw-bold counter-number" data-target="8">0</h3><p class="mb-0">Skill</p></div></div>
+            <div class="col-12"><div class="glass-card p-3 text-center"><h3 class="fw-bold counter-number" data-target="14">0</h3><p class="mb-0">Sertifikat</p></div></div>
           </div>
         </div>
       </div>
@@ -353,9 +465,12 @@
   <!-- Skills Section -->
   <section id="skills" class="py-5">
     <div class="container">
-      <div class="text-center mb-5" data-aos="fade-up"><h2 class="fw-bold">Keahlian <span class="text-info">Teknis</span></h2><div class="mx-auto mt-2" style="width:70px; height:3px; background:#38BDF8;"></div></div>
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
+      <div class="text-center mb-4" data-aos="fade-up">
+        <h2 class="fw-bold">Keahlian <span class="text-info">Teknis</span></h2>
+        <div class="mx-auto mt-2" style="width:60px; height:3px; background: linear-gradient(90deg, #38BDF8, #06B6D4);"></div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
           <div class="skill-item" data-aos="fade-up"><div class="skill-name">HTML/CSS <span class="float-end">25%</span></div><div class="progress-bar-custom"><div class="progress-fill" data-skill="25"></div></div></div>
           <div class="skill-item" data-aos="fade-up"><div class="skill-name">JavaScript <span class="float-end">25%</span></div><div class="progress-bar-custom"><div class="progress-fill" data-skill="25"></div></div></div>
           <div class="skill-item" data-aos="fade-up"><div class="skill-name">PHP <span class="float-end">35%</span></div><div class="progress-bar-custom"><div class="progress-fill" data-skill="35"></div></div></div>
@@ -372,42 +487,47 @@
   <!-- Projects Section -->
   <section id="projects" class="py-5">
     <div class="container">
-      <div class="text-center" data-aos="fade-up"><h2 class="fw-bold">Proyek <span class="text-info">Unggulan</span></h2><div class="mx-auto mt-2" style="width:70px; height:3px; background:#38BDF8;"></div></div>
+      <div class="text-center mb-4" data-aos="fade-up">
+        <h2 class="fw-bold">Proyek <span class="text-info">Unggulan</span></h2>
+        <div class="mx-auto mt-2" style="width:60px; height:3px; background: linear-gradient(90deg, #38BDF8, #06B6D4);"></div>
+      </div>
       <div class="d-flex flex-wrap justify-content-center my-4" data-aos="fade-up">
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="web">Web</button>
         <button class="filter-btn" data-filter="uiux">UI/UX</button>
         <button class="filter-btn" data-filter="mobile">Mobile</button>
       </div>
-      <div class="row g-4" id="projectsContainer">
+      <div class="row g-4">
         <div class="col-md-6 col-lg-4 project-item web" data-aos="zoom-in">
-          <div class="glass-card project-card">
-            <img src="ProjectAlor.jpg" class="card-img-top" alt="Website Pariwisata Alor">
+          <div class="glass-card project-card p-0">
+            <img src="ProjectAlor.jpg" alt="Alor" onerror="this.src='https://picsum.photos/id/104/400/250'">
             <div class="p-3">
+              <div class="badge-tech">🌐 Web - HTML/CSS/JS</div>
               <h5>Website Pariwisata Kabupaten Alor</h5>
-              <p>Website informasi wisata, budaya, sejarah, dan destinasi Kabupaten Alor. Teknologi: HTML, CSS, JavaScript.</p>
-              <button class="btn btn-sm btn-outline-info mt-2" data-bs-toggle="modal" data-bs-target="#projectModal" data-desc="<strong>Website Pariwisata Alor</strong><br>Platform digital yang menampilkan keindahan alam Alor, budaya lokal, sejarah, dan destinasi wisata. Dibangun dengan HTML5, CSS3, dan JavaScript murni dengan desain responsif.">Detail</button>
+              <p>Website informasi wisata, budaya, sejarah Kabupaten Alor.</p>
+              <button class="btn btn-sm btn-outline-info mt-2" data-bs-toggle="modal" data-bs-target="#projectModal" data-desc="<strong>Website Pariwisata Alor</strong><br>Platform digital destinasi wisata Kabupaten Alor. HTML5, CSS3, JavaScript.">Detail</button>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-lg-4 project-item mobile" data-aos="zoom-in">
-          <div class="glass-card project-card">
-            <img src="ProjectMBG.jpg" class="card-img-top" alt="Asisten Tour Mobile App">
+          <div class="glass-card project-card p-0">
+            <img src="ProjectMBG.jpg" alt="Mobile" onerror="this.src='https://picsum.photos/id/15/400/250'">
             <div class="p-3">
-              <div class="mobile-badge"><i class="bi bi-phone"></i> Mobile Programming - Flutter</div>
+              <div class="badge-tech">📱 Flutter - Mobile</div>
               <h5>Asisten Tour - Mobile App</h5>
-              <p>Aplikasi mobile asisten perjalanan wisata yang membantu pengguna menemukan destinasi, pemandu lokal, dan rekomendasi rute perjalanan.</p>
-              <button class="btn btn-sm btn-outline-info mt-2" data-bs-toggle="modal" data-bs-target="#projectModal" data-desc="<strong>Asisten Tour - Mobile Application</strong><br><br>Tugas Mata Kuliah Mobile Programming<br><br>Aplikasi mobile berbasis Flutter yang berfungsi sebagai asisten perjalanan wisata. Fitur utama:<br>• Menampilkan daftar destinasi wisata lengkap dengan deskripsi<br>• Sistem rekomendasi pemandu lokal<br>• Perencanaan rute perjalanan<br>• Informasi cuaca real-time<br>• Penyimpanan favorit wisatawan<br><br>Teknologi: Flutter, Dart, REST API, SQLite untuk penyimpanan lokal.">Detail</button>
+              <p>Aplikasi mobile asisten perjalanan wisata dengan Flutter.</p>
+              <button class="btn btn-sm btn-outline-info mt-2" data-bs-toggle="modal" data-bs-target="#projectModal" data-desc="<strong>Asisten Tour Mobile</strong><br>Flutter, Dart, REST API, SQLite.">Detail</button>
             </div>
           </div>
         </div>
         <div class="col-md-6 col-lg-4 project-item uiux" data-aos="zoom-in">
-          <div class="glass-card project-card">
-            <img src="ProjectVeloxa.jpg" class="card-img-top" alt="Prototype Website Parfum">
+          <div class="glass-card project-card p-0">
+            <img src="ProjectVeloxa.jpg" alt="UI/UX" onerror="this.src='https://picsum.photos/id/26/400/250'">
             <div class="p-3">
+              <div class="badge-tech">🎨 Figma - UI/UX</div>
               <h5>Prototype Website Parfum</h5>
-              <p>UI/UX Design menggunakan Figma. Fitur Login dan Dashboard Pengguna.</p>
-              <button class="btn btn-sm btn-outline-info mt-2" data-bs-toggle="modal" data-bs-target="#projectModal" data-desc="<strong>Prototype Website Parfum - UI/UX Design</strong><br>Desain antarmuka modern untuk e-commerce parfum dengan fitur autentikasi, dashboard pengguna, dan katalog produk. Dibuat menggunakan Figma dengan pendekatan user-centered design.">Detail</button>
+              <p>Desain UI/UX modern dengan Figma, fitur login & dashboard.</p>
+              <button class="btn btn-sm btn-outline-info mt-2" data-bs-toggle="modal" data-bs-target="#projectModal" data-desc="<strong>Prototype Parfum</strong><br>Desain UI/UX e-commerce parfum dengan Figma.">Detail</button>
             </div>
           </div>
         </div>
@@ -418,49 +538,30 @@
   <!-- Education Timeline -->
   <section class="py-5">
     <div class="container">
-      <div class="text-center mb-5" data-aos="fade-up"><h2 class="fw-bold">Perjalanan <span class="text-info">Pendidikan</span></h2></div>
+      <div class="text-center mb-4" data-aos="fade-up"><h2 class="fw-bold">Perjalanan <span class="text-info">Pendidikan</span></h2></div>
       <div class="row justify-content-center">
         <div class="col-md-8">
           <div class="timeline" data-aos="fade-up">
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-line"></div>
-              <div class="glass-card p-3">
-                <h5>2024 - Sekarang</h5>
-                <h6>S1 Sistem Informasi - Menempuh</h6>
-                <p>Universitas Bina Sarana Informatika, Jurusan Sistem Informasi. Fokus pada pengembangan sistem, database, dan teknologi informasi.</p>
-              </div>
-            </div>
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="glass-card p-3">
-                <h5>2020 - 2023</h5>
-                <h6>Lulusan SMA</h6>
-                <p>SMAN 1 Rancabungur - Jurusan IPS.</p>
-              </div>
-            </div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-line"></div><div class="glass-card p-3"><h5>2024 - Sekarang</h5><h6>S1 Sistem Informasi - Menempuh</h6><p class="mb-0">Universitas Bina Sarana Informatika</p></div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="glass-card p-3"><h5>2020 - 2023</h5><h6>Lulusan SMA</h6><p class="mb-0">SMAN 1 Rancabungur - Jurusan IPS</p></div></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Certificate Section -->
+  <!-- Certificates Section -->
   <section id="certificates" class="py-5">
     <div class="container">
       <div class="text-center mb-4" data-aos="fade-up">
         <h2 class="fw-bold">Sertifikat <span class="text-info">Kompetensi</span></h2>
-        <div class="mx-auto mt-2" style="width:70px; height:3px; background:#38BDF8;"></div>
+        <div class="mx-auto mt-2" style="width:60px; height:3px; background: linear-gradient(90deg, #38BDF8, #06B6D4);"></div>
       </div>
-      <div class="row g-3" id="certGallery">
-        <div class="col-6 col-md-3"><div class="glass-card p-3 text-center" style="cursor: pointer; height: 100%;" onclick="window.open('assets/19240450-Nethar Balawan Mualikul Mulki (1).pdf', '_blank')"><i class="bi bi-file-pdf-fill" style="font-size: 3rem; color: #e74c3c;"></i><p class="mt-2 mb-0 fw-semibold">CERTIFICATE COMPETENCY inercorp</p><small class="text-info">Klik untuk buka PDF</small></div></div>
-        <div class="col-6 col-md-3"><div class="glass-card p-3 text-center" style="cursor: pointer; height: 100%;" onclick="window.open('assets/BEC-X-19240450-SWE2024.pdf', '_blank')"><i class="bi bi-file-pdf-fill" style="font-size: 3rem; color: #e74c3c;"></i><p class="mt-2 mb-0 fw-semibold">Sertifikat Entrepeneur</p><small class="text-info">Klik untuk buka PDF</small></div></div>
-        <div class="col-6 col-md-3"><div class="glass-card p-3 text-center" style="cursor: pointer; height: 100%;" onclick="window.open('assets/Event Online Free Class - Data Engineer.pdf', '_blank')"><i class="bi bi-file-pdf-fill" style="font-size: 3rem; color: #e74c3c;"></i><p class="mt-2 mb-0 fw-semibold">Sertifikat Data Engineer</p><small class="text-info">Klik untuk buka PDF</small></div></div>
-        <div class="col-6 col-md-3"><div class="glass-card p-3 text-center" style="cursor: pointer; height: 100%;" onclick="window.open('assets/ORMIK.pdf', '_blank')"><i class="bi bi-file-pdf-fill" style="font-size: 3rem; color: #e74c3c;"></i><p class="mt-2 mb-0 fw-semibold">Sertifikat Ormik</p><small class="text-info">Klik untuk buka PDF</small></div></div>
-        <div class="col-6 col-md-3"><div class="glass-card p-3 text-center" style="cursor: pointer; height: 100%;" onclick="window.open('assets/preview-sertifikat-AKS-261DP1.pdf', '_blank')"><i class="bi bi-file-pdf-fill" style="font-size: 3rem; color: #e74c3c;"></i><p class="mt-2 mb-0 fw-semibold">Sertifikat Python - Aksademy</p><small class="text-info">Klik untuk buka PDF</small></div></div>
-        <div class="col-6 col-md-3"><div class="glass-card p-3 text-center" style="cursor: pointer; height: 100%;" onclick="window.open('assets/SEMOT.pdf', '_blank')"><i class="bi bi-file-pdf-fill" style="font-size: 3rem; color: #e74c3c;"></i><p class="mt-2 mb-0 fw-semibold">Sertifikat SEMOT</p><small class="text-info">Klik untuk buka PDF</small></div></div>
-        <div class="col-6 col-md-3"><div class="glass-card p-3 text-center" style="cursor: pointer; height: 100%;" onclick="window.open('assets/Sertifikat Dibimbing DSF 48.0 - UIUX.pdf', '_blank')"><i class="bi bi-file-pdf-fill" style="font-size: 3rem; color: #e74c3c;"></i><p class="mt-2 mb-0 fw-semibold">Sertifikat DSF 48.0 - UI/UX</p><small class="text-info">Klik untuk buka PDF</small></div></div>
-        <div class="col-6 col-md-3"><div class="glass-card p-3 text-center" style="cursor: pointer; height: 100%;" onclick="window.open('assets/Sertifikat Dibimbing Event Online Free Class ui ux.pdf', '_blank')"><i class="bi bi-file-pdf-fill" style="font-size: 3rem; color: #e74c3c;"></i><p class="mt-2 mb-0 fw-semibold">Sertifikat Event UI/UX</p><small class="text-info">Klik untuk buka PDF</small></div></div>
+      <div class="row g-3">
+        <div class="col-6 col-md-3"><div class="glass-card cert-card" onclick="window.open('assets/19240450-Nethar Balawan Mualikul Mulki (1).pdf', '_blank')"><i class="bi bi-file-pdf-fill"></i><p class="fw-semibold">Certificate Competency</p><small class="text-info">Buka PDF</small></div></div>
+        <div class="col-6 col-md-3"><div class="glass-card cert-card" onclick="window.open('assets/BEC-X-19240450-SWE2024.pdf', '_blank')"><i class="bi bi-file-pdf-fill"></i><p class="fw-semibold">Entrepreneur</p><small class="text-info">Buka PDF</small></div></div>
+        <div class="col-6 col-md-3"><div class="glass-card cert-card" onclick="window.open('assets/Event Online Free Class - Data Engineer.pdf', '_blank')"><i class="bi bi-file-pdf-fill"></i><p class="fw-semibold">Data Engineer</p><small class="text-info">Buka PDF</small></div></div>
+        <div class="col-6 col-md-3"><div class="glass-card cert-card" onclick="window.open('assets/ORMIK.pdf', '_blank')"><i class="bi bi-file-pdf-fill"></i><p class="fw-semibold">ORMIK</p><small class="text-info">Buka PDF</small></div></div>
       </div>
     </div>
   </section>
@@ -468,25 +569,22 @@
   <!-- Contact Section -->
   <section id="contact" class="py-5">
     <div class="container">
-      <div class="text-center mb-4" data-aos="fade-up"><h2 class="fw-bold">Hubungi <span class="text-info">Saya</span></h2><div class="mx-auto mt-2" style="width:70px; height:3px; background:#38BDF8;"></div></div>
-      <div class="row g-5">
+      <div class="text-center mb-4" data-aos="fade-up">
+        <h2 class="fw-bold">Hubungi <span class="text-info">Saya</span></h2>
+        <div class="mx-auto mt-2" style="width:60px; height:3px; background: linear-gradient(90deg, #38BDF8, #06B6D4);"></div>
+      </div>
+      <div class="row g-4">
         <div class="col-md-6" data-aos="fade-right">
           <div class="glass-card p-4">
-            <h4><i class="bi bi-person-lines-fill text-info me-2"></i>Informasi Kontak</h4>
-            <p><i class="bi bi-envelope fs-5 me-2"></i> 19240450@bsi.ac.id</p>
+            <h4><i class="bi bi-person-lines-fill text-info me-2"></i>Kontak Saya</h4>
+            <p><i class="bi bi-envelope me-2"></i> 19240450@bsi.ac.id</p>
             <p><i class="bi bi-github me-2"></i> github.com/netharbalawan</p>
             <p><i class="bi bi-linkedin me-2"></i> linkedin.com/in/netharbalawan</p>
             <p><i class="bi bi-instagram me-2"></i> @netharrbalawannmm_</p>
-            <div class="mt-3 d-flex gap-4">
-              <a href="https://github.com/netharbalawan" target="_blank" class="text-info fs-2"><i class="bi bi-github"></i></a>
-              <a href="https://linkedin.com/in/netharbalawan" target="_blank" class="text-info fs-2"><i class="bi bi-linkedin"></i></a>
-              <a href="https://instagram.com/netharrbalawannmm_" target="_blank" class="text-info fs-2"><i class="bi bi-instagram"></i></a>
-            </div>
-            <hr class="bg-secondary">
-            <div class="linkedin-badge rounded-3 p-3 text-center">
-              <i class="bi bi-linkedin fs-4 me-2"></i> <strong>LinkedIn Profile</strong><br>
-              <small>Klik untuk terhubung profesional</small><br>
-              <a href="https://linkedin.com/in/netharbalawan" target="_blank" class="btn btn-sm btn-light mt-2">Kunjungi LinkedIn →</a>
+            <div class="d-flex gap-3 mt-3">
+              <a href="https://github.com/netharbalawan" target="_blank" class="text-info fs-3"><i class="bi bi-github"></i></a>
+              <a href="https://linkedin.com/in/netharbalawan" target="_blank" class="text-info fs-3"><i class="bi bi-linkedin"></i></a>
+              <a href="https://instagram.com/netharrbalawannmm_" target="_blank" class="text-info fs-3"><i class="bi bi-instagram"></i></a>
             </div>
           </div>
         </div>
@@ -494,10 +592,10 @@
           <div class="glass-card p-4">
             <h4><i class="bi bi-chat-dots-fill text-info"></i> Kirim Pesan</h4>
             <form id="contactForm">
-              <div class="mb-3"><input type="text" class="form-control bg-dark text-white" id="name" placeholder="Nama Lengkap" required></div>
-              <div class="mb-3"><input type="email" class="form-control bg-dark text-white" id="email" placeholder="Email" required></div>
-              <div class="mb-3"><textarea rows="3" class="form-control bg-dark text-white" id="message" placeholder="Pesan / Kerjasama" required></textarea></div>
-              <button type="submit" class="btn btn-glow w-100">Kirim Pesan <i class="bi bi-send"></i></button>
+              <input type="text" class="form-control mb-3" id="name" placeholder="Nama Lengkap" required>
+              <input type="email" class="form-control mb-3" id="email" placeholder="Email" required>
+              <textarea rows="3" class="form-control mb-3" id="message" placeholder="Pesan / Kerjasama" required></textarea>
+              <button type="submit" class="btn btn-primary-glow w-100">Kirim Pesan <i class="bi bi-send"></i></button>
               <div id="formAlert" class="mt-3"></div>
             </form>
           </div>
@@ -507,59 +605,55 @@
   </section>
 </main>
 
-<footer class="py-4 border-top border-secondary">
-  <div class="container text-center">
-    <p class="mb-0">&copy; 2026 Nethar Balawan - Mahasiswa Sistem Informasi.</p>
-    <a href="#" id="backToTop" class="btn btn-sm btn-outline-info mt-3 rounded-pill"><i class="bi bi-arrow-up-short"></i> Back to Top</a>
+<footer class="py-4 text-center border-top border-secondary">
+  <div class="container">
+    <p class="mb-0 small">&copy; 2026 Nethar Balawan Mualikul Mulki - Mahasiswa Sistem Informasi</p>
+    <a href="#" id="backToTop" class="btn btn-sm btn-outline-info mt-2 rounded-pill"><i class="bi bi-arrow-up-short"></i> Kembali ke Atas</a>
   </div>
 </footer>
 
 <!-- Modals -->
-<div class="modal fade" id="projectModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content bg-dark text-white"><div class="modal-header"><h5 class="modal-title">Detail Proyek</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body" id="modalProjectDesc"></div></div></div></div>
-<div class="modal fade" id="lightboxModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered modal-lg"><div class="modal-content bg-transparent border-0"><img id="lightboxImg" src="" class="w-100 rounded-4"></div></div></div>
+<div class="modal fade" id="projectModal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><div class="modal-header border-0"><h5 class="modal-title">Detail Proyek</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button></div><div class="modal-body" id="modalProjectDesc"></div></div></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init({ duration: 1000, once: false, mirror: true });
+  AOS.init({ duration: 800, once: true, mirror: false });
   
-  window.addEventListener('load', () => { setTimeout(() => { document.getElementById('loading-screen').style.opacity = '0'; setTimeout(() => { document.getElementById('loading-screen').style.display = 'none'; }, 500); }, 800); });
+  setTimeout(() => { document.getElementById('loading-screen').style.opacity = '0'; setTimeout(() => { document.getElementById('loading-screen').style.display = 'none'; }, 400); }, 800);
   
-  new Typed('#typed-output', { stringsElement: '#typed-strings', typeSpeed: 70, backSpeed: 40, backDelay: 1500, startDelay: 500, loop: true, cursorChar: '|', smartBackspace: true });
+  new Typed('#typed-output', { stringsElement: '#typed-strings', typeSpeed: 70, backSpeed: 40, backDelay: 1500, loop: true });
   
-  window.addEventListener('scroll', () => { const winScroll = document.documentElement.scrollTop, height = document.documentElement.scrollHeight - window.innerHeight; const scrolled = (winScroll/height)*100; document.getElementById('scrollProgress').style.width = scrolled+'%'; });
+  window.addEventListener('scroll', () => {
+    let winScroll = document.documentElement.scrollTop;
+    let height = document.documentElement.scrollHeight - window.innerHeight;
+    document.getElementById('scrollProgress').style.width = (winScroll / height) * 100 + '%';
+    let navbar = document.getElementById('mainNavbar');
+    if (window.scrollY > 50) navbar.classList.add('scrolled');
+    else navbar.classList.remove('scrolled');
+  });
   
-  // Navbar scroll effect
-  window.addEventListener('scroll', () => { const navbar = document.getElementById('mainNavbar'); if (window.scrollY > 50) { navbar.classList.add('scrolled'); } else { navbar.classList.remove('scrolled'); } });
+  new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { let el = entry.target, target = parseInt(el.dataset.target), count = 0; let update = () => { if (count < target) { count += Math.ceil(target / 20); if (count > target) count = target; el.innerText = count; requestAnimationFrame(update); } else el.innerText = target; }; update(); observer.unobserve(el); } }), { threshold: 0.5 }).observeAll = (els) => { els.forEach(el => this.observe(el)); }; 
+  const counters = document.querySelectorAll('.counter-number');
+  const counterObserver = new IntersectionObserver(entries => { entries.forEach(entry => { if (entry.isIntersecting) { let el = entry.target, target = parseInt(el.dataset.target), count = 0; let update = () => { if (count < target) { count += Math.ceil(target / 20); if (count > target) count = target; el.innerText = count; requestAnimationFrame(update); } else el.innerText = target; }; update(); counterObserver.unobserve(el); } }); }, { threshold: 0.5 });
+  counters.forEach(c => counterObserver.observe(c));
   
-  const counters = document.querySelectorAll('.counter-number'); 
-  const counterObserver = new IntersectionObserver(entries=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ const el=entry.target; const target=parseInt(el.getAttribute('data-target')); let count=0; const update=()=>{ if(count<target){ count+=Math.ceil(target/25); if(count>target) count=target; el.innerText=count; requestAnimationFrame(update); }else el.innerText=target; }; update(); counterObserver.unobserve(el); } }); }, {threshold:0.5}); 
-  counters.forEach(c=>counterObserver.observe(c));
+  document.querySelectorAll('.progress-fill').forEach(bar => { new IntersectionObserver(entries => { if (entries[0].isIntersecting) { bar.style.width = bar.dataset.skill + '%'; this.disconnect(); } }, { threshold: 0.4 }).observe(bar); });
   
-  const progressBars = document.querySelectorAll('.progress-fill'); 
-  const progressObserver = new IntersectionObserver(entries=>{ entries.forEach(entry=>{ if(entry.isIntersecting){ const bar = entry.target; const percent = bar.getAttribute('data-skill'); bar.style.width = percent+'%'; progressObserver.unobserve(bar); } }); },{threshold:0.4}); 
-  progressBars.forEach(p=>progressObserver.observe(p));
+  document.querySelectorAll('.filter-btn').forEach(btn => { btn.addEventListener('click', () => { let filter = btn.dataset.filter; document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('.project-item').forEach(pro => { pro.style.display = (filter === 'all' || pro.classList.contains(filter)) ? 'block' : 'none'; }); }); });
   
-  const filterBtns = document.querySelectorAll('.filter-btn'); 
-  const projects = document.querySelectorAll('.project-item'); 
-  filterBtns.forEach(btn=>{ btn.addEventListener('click',()=>{ const filter = btn.getAttribute('data-filter'); filterBtns.forEach(b=>b.classList.remove('active')); btn.classList.add('active'); projects.forEach(pro=>{ if(filter==='all' || pro.classList.contains(filter)) pro.style.display='block'; else pro.style.display='none'; }); }); });
+  document.querySelectorAll('[data-bs-target="#projectModal"]').forEach(btn => { btn.addEventListener('click', () => { document.getElementById('modalProjectDesc').innerHTML = btn.dataset.desc; }); });
   
-  document.querySelectorAll('[data-bs-target="#projectModal"]').forEach(btn=>{ btn.addEventListener('click',()=>{ const desc = btn.getAttribute('data-desc') || "Proyek inovatif."; document.getElementById('modalProjectDesc').innerHTML=desc; }); });
+  document.getElementById('contactForm').addEventListener('submit', function(e) { e.preventDefault(); let name = document.getElementById('name').value.trim(), email = document.getElementById('email').value.trim(), msg = document.getElementById('message').value.trim(); if (!name || !email || !msg) document.getElementById('formAlert').innerHTML = '<div class="alert alert-danger">Semua field harus diisi!</div>'; else if (!email.includes('@')) document.getElementById('formAlert').innerHTML = '<div class="alert alert-danger">Email tidak valid!</div>'; else { document.getElementById('formAlert').innerHTML = '<div class="alert alert-success">Pesan terkirim!</div>'; this.reset(); } });
   
-  document.getElementById('contactForm').addEventListener('submit', function(e){ e.preventDefault(); const name=document.getElementById('name').value.trim(); const email=document.getElementById('email').value.trim(); const msg=document.getElementById('message').value.trim(); if(!name || !email || !msg) {document.getElementById('formAlert').innerHTML='<div class="alert alert-danger">Semua field harus diisi!</div>'; return;} if(!email.includes('@')){document.getElementById('formAlert').innerHTML='<div class="alert alert-danger">Email tidak valid!</div>'; return;} document.getElementById('formAlert').innerHTML='<div class="alert alert-success">Pesan terkirim!</div>'; this.reset(); });
+  document.getElementById('scrollDownBtn').addEventListener('click', () => window.scrollBy({ top: window.innerHeight - 80, behavior: 'smooth' }));
+  document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
   
-  document.getElementById('scrollDownBtn').addEventListener('click',()=>{ window.scrollBy({top:window.innerHeight-80,behavior:'smooth'}); });
-  document.getElementById('backToTop').addEventListener('click',()=>{ window.scrollTo({top:0,behavior:'smooth'}); });
+  particlesJS("particles-js", { particles: { number: { value: 40 }, color: { value: "#38BDF8" }, shape: { type: "circle" }, opacity: { value: 0.2 }, size: { value: 2.5 }, move: { enable: true, speed: 0.7 } }, interactivity: { events: { onhover: { enable: true, mode: "repulse" } } } });
   
-  if(window.innerWidth > 768) { document.addEventListener('mousemove',(e)=>{ document.querySelector('.cursor-glow').style.left=e.clientX+'px'; document.querySelector('.cursor-glow').style.top=e.clientY+'px'; }); }
+  window.addEventListener('scroll', () => { let current = ""; document.querySelectorAll('section').forEach(sec => { if (window.scrollY >= sec.offsetTop - 150) current = sec.id; }); document.querySelectorAll('.nav-link').forEach(link => { link.classList.remove('active'); if (link.getAttribute('href') === `#${current}`) link.classList.add('active'); }); });
   
-  particlesJS("particles-js", { particles: { number: { value: 45 }, color: { value: "#38BDF8" }, shape: { type: "circle" }, opacity: { value: 0.25 }, size: { value: 2.5 }, move: { enable: true, speed: 0.8 } }, interactivity: { events: { onhover: { enable: true, mode: "repulse" } } } });
-  
-  const sections = document.querySelectorAll('section'); 
-  window.addEventListener('scroll',()=>{ let current = ""; sections.forEach(sec=>{ const top = sec.offsetTop-150; if(pageYOffset>=top) current=sec.getAttribute('id'); }); document.querySelectorAll('.nav-link').forEach(link=>{ link.classList.remove('active'); if(link.getAttribute('href')===`#${current}`) link.classList.add('active'); }); });
-  
-  const downloadBtn = document.querySelector('#downloadCVBtn');
-  if(downloadBtn) { downloadBtn.addEventListener('click', function(e) { e.preventDefault(); const element = document.createElement('a'); const file = new Blob(['%PDF-1.4\n CV Nethar Balawan'], {type: 'application/pdf'}); element.href = URL.createObjectURL(file); element.download = 'CV-Nethar-Balawan.pdf'; document.body.appendChild(element); element.click(); document.body.removeChild(element); URL.revokeObjectURL(element.href); }); }
+  document.querySelector('#downloadCVBtn')?.addEventListener('click', function(e) { e.preventDefault(); let a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['CV Nethar Balawan'], { type: 'application/pdf' })); a.download = 'CV-Nethar-Balawan.pdf'; a.click(); URL.revokeObjectURL(a.href); });
 </script>
 </body>
 </html>
